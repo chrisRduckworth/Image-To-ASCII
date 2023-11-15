@@ -25,7 +25,7 @@ class TestGlyph:
             ]
         expected = np.array(expected, np.bool_)
 
-        glyph.generate_array("consola", 8, 96)
+        glyph.generate_array("C:\\Windows\\Fonts\\consola.ttf", 8, 96)
 
         """creates an array attribute"""
         assert hasattr(glyph, "img_array")
