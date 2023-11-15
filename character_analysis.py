@@ -1,19 +1,25 @@
-class Glyph:
-  def __init__(self, character):
-    self.character = character
-  
-  def generate_array(self):
-    pass
+import numpy as np
 
-  def compare_array(self, arr):
-    pass
+
+class Glyph:
+    def __init__(self, character):
+        self.character = character
+
+    def generate_array(self, font_name, font_size, dpi):
+        pass
+
+    def compare_array(self, arr):
+        pass
+
 
 class Alphabet:
-  def __init__(self, name):
-    self.name = name
-  
-  def create_glyphs(self):
-    pass
+    def __init__(self, name, font_size, dpi=96):
+        self.name = name
+        self.font_size = font_size
+        self.dpi = dpi
 
-  def find_optimal_glyph(self, arr):
-    pass
+    def create_glyphs(self):
+        pass
+
+    def find_optimal_glyph(self, arr):
+        pass
