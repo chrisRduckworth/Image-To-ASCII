@@ -10,11 +10,28 @@ class TestGlyph:
 
     def test_generate_array(self):
         glyph = Glyph("a")
+        expected = [
+            [True,  True,  True,  True,  True,  True,],
+            [True,  True,  True,  True,  True,  True,],
+            [True,  True,  True,  True,  True,  True,],
+            [True,  True, False, False, False,  True,],
+            [True,  True,  True,  True,  True, False,],
+            [True,  True, False, False, False, False,],
+            [True, False,  True,  True,  True, False,],
+            [True, False,  True,  True, False, False,],
+            [True,  True, False, False, False, False,],
+            [True,  True,  True,  True,  True,  True,],
+            [True,  True,  True,  True,  True,  True,]
+            ]
+        expected = np.array(expected, np.bool_)
 
-        glyph.generate_array("consola", 12, 96)
+        glyph.generate_array("consola", 8, 96)
 
         """creates an array attribute"""
         assert hasattr(glyph, "img_array")
 
         """generates a boolean array"""
         assert glyph.img_array.dtype == np.bool_
+
+        """generated array should be correct"""
+        assert np.array_equal(expected, glyph.img_array) 
