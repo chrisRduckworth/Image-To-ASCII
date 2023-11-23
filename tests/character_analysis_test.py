@@ -1,5 +1,6 @@
 from character_analysis import Glyph, Alphabet
 import numpy as np
+import string
 
 
 class TestGlyph:
@@ -45,3 +46,21 @@ class TestAlphabet:
         assert alphabet.font_path == font_path
         assert alphabet.font_size == font_size
         assert alphabet.dpi == 96
+
+    def test_create_glyphs(self):
+        font_path = "C:\\Windows\\Fonts\\consola.ttf"
+        font_size = 8
+        alphabet = Alphabet(font_path, font_size)
+
+        alphabet.create_glyphs()
+
+        """creates a glyphs property"""
+        assert hasattr(alphabet, "glyphs")
+
+        """glyphs property is an array of glyph objects"""
+        for glyph in alphabet.glyphs:
+            assert isinstance(glyph, Glyph)
+        
+        """creates a glyph object for each character"""
+        expected_length = len(string.ascii_letters + string.digits + string.punctuation)
+        assert len(alphabet.glyphs) == expected_length
