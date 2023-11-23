@@ -2,15 +2,18 @@ from character_analysis import Glyph, Alphabet
 import numpy as np
 import string
 
+from PIL import ImageFont
+from fontTools import ttLib
 
 class TestGlyph:
     def test_init(self):
-        glyph = Glyph("a")
+        glyph = Glyph("a", "a")
         """glyph is initiated with the correct character attribute"""
         assert glyph.character == "a"
+        assert glyph.character_name == "a"
 
     def test_generate_array(self):
-        glyph = Glyph("a")
+        glyph = Glyph("a", "a")
         expected = [
             [True,  True,  True,  True,  True,  True,],
             [True,  True,  True,  True,  True,  True,],
@@ -25,8 +28,11 @@ class TestGlyph:
             [True,  True,  True,  True,  True,  True,]
             ]
         expected = np.array(expected, np.bool_)
+        font_path = "C:\\Windows\\Fonts\\consola.ttf"
+        font = ttLib.TTFont(font_path)
+        pillow_font = ImageFont.truetype(font_path, 8)
 
-        glyph.generate_array("C:\\Windows\\Fonts\\consola.ttf", 8, 96)
+        glyph.generate_array(font, pillow_font, 8, 96)
 
         """creates an array attribute"""
         assert hasattr(glyph, "img_array")
@@ -62,7 +68,7 @@ class TestAlphabet:
             assert isinstance(glyph, Glyph)
         
         """creates a glyph object for each character"""
-        characters = string.punctuation[:-4]
+        characters = string.printable[:-4]
         glyphs_characters = [glyph.character for glyph in alphabet.glyphs]
         assert len(alphabet.glyphs) == len(characters)
         for char in characters:
