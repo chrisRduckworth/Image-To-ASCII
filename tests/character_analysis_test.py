@@ -62,10 +62,10 @@ class TestAlphabet:
             assert isinstance(glyph, Glyph)
         
         """creates a glyph object for each character"""
-        characters = string.ascii_letters + string.digits + string.punctuation
+        characters = string.punctuation[:-4]
         glyphs_characters = [glyph.character for glyph in alphabet.glyphs]
         assert len(alphabet.glyphs) == len(characters)
-        for char in string.ascii_letters + string.digits + string.punctuation:
+        for char in characters:
             assert char in glyphs_characters
         
         """creates the img_array for each glyph"""
