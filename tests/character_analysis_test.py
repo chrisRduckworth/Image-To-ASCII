@@ -67,3 +67,8 @@ class TestAlphabet:
         assert len(alphabet.glyphs) == len(characters)
         for char in string.ascii_letters + string.digits + string.punctuation:
             assert char in glyphs_characters
+        
+        """creates the img_array for each glyph"""
+        for glyph in alphabet.glyphs:
+            assert hasattr(glyph, "img_array")
+        
