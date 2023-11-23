@@ -2,6 +2,7 @@ import numpy as np
 from PIL import ImageDraw, Image, ImageFont
 from fontTools import ttLib
 from math import ceil
+import string
 
 class Glyph:
     def __init__(self, character):
@@ -32,7 +33,8 @@ class Alphabet:
         self.dpi = dpi
 
     def create_glyphs(self):
-        pass
+        characters = string.ascii_letters + string.digits + string.punctuation
+        self.glyphs = [Glyph(char) for char in characters]
 
     def find_optimal_glyph(self, arr):
         pass
