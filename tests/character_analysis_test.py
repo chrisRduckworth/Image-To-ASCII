@@ -63,4 +63,7 @@ class TestAlphabet:
         
         """creates a glyph object for each character"""
         expected_length = len(string.ascii_letters + string.digits + string.punctuation)
+        glyphs_characters = map(lambda g: g.character, alphabet.glyphs)
         assert len(alphabet.glyphs) == expected_length
+        for char in string.ascii_letters + string.digits + string.punctuation:
+            assert char in glyphs_characters
