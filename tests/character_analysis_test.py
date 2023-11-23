@@ -35,3 +35,13 @@ class TestGlyph:
 
         """generated array should be correct"""
         assert np.array_equal(expected, glyph.img_array) 
+
+class TestAlphabet:
+    def test_init(self):
+        font_path = "C:\\Windows\\Fonts\\consola.ttf"
+        font_size = 8
+        alphabet = Alphabet(font_path, font_size)
+        """Alphabet is initiatied with the correct attributes"""
+        assert alphabet.font_path == font_path
+        assert alphabet.font_size == font_size
+        assert alphabet.dpi == 96
