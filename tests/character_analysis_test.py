@@ -62,8 +62,8 @@ class TestAlphabet:
             assert isinstance(glyph, Glyph)
         
         """creates a glyph object for each character"""
-        expected_length = len(string.ascii_letters + string.digits + string.punctuation)
-        glyphs_characters = map(lambda g: g.character, alphabet.glyphs)
-        assert len(alphabet.glyphs) == expected_length
+        characters = string.ascii_letters + string.digits + string.punctuation
+        glyphs_characters = [glyph.character for glyph in alphabet.glyphs]
+        assert len(alphabet.glyphs) == len(characters)
         for char in string.ascii_letters + string.digits + string.punctuation:
             assert char in glyphs_characters
