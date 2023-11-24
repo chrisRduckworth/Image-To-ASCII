@@ -5,6 +5,7 @@ import string
 from PIL import ImageFont
 from fontTools import ttLib
 
+
 class TestGlyph:
     def test_init(self):
         glyph = Glyph("a", "a")
@@ -14,19 +15,17 @@ class TestGlyph:
 
     def test_generate_array(self):
         glyph = Glyph("a", "a")
-        expected = [
-            [True,  True,  True,  True,  True,  True,],
-            [True,  True,  True,  True,  True,  True,],
-            [True,  True,  True,  True,  True,  True,],
-            [True,  True, False, False, False,  True,],
-            [True,  True,  True,  True,  True, False,],
-            [True,  True, False, False, False, False,],
-            [True, False,  True,  True,  True, False,],
-            [True, False,  True,  True, False, False,],
-            [True,  True, False, False, False, False,],
-            [True,  True,  True,  True,  True,  True,],
-            [True,  True,  True,  True,  True,  True,]
-            ]
+        expected = [[False, False, False, False, False, False],
+                    [False, False, False, False, False, False],
+                    [False, False, False, False, False, False],
+                    [False, False,  True,  True,  True, False],
+                    [False, False, False, False, False,  True],
+                    [False, False,  True,  True,  True,  True],
+                    [False,  True, False, False, False,  True],
+                    [False,  True, False, False,  True,  True],
+                    [False, False,  True,  True,  True,  True],
+                    [False, False, False, False, False, False],
+                    [False, False, False, False, False, False]]
         expected = np.array(expected, np.bool_)
         font_path = "C:\\Windows\\Fonts\\consola.ttf"
         font = ttLib.TTFont(font_path)
@@ -41,7 +40,8 @@ class TestGlyph:
         assert glyph.img_array.dtype == np.bool_
 
         """generated array should be correct"""
-        assert np.array_equal(expected, glyph.img_array) 
+        assert np.array_equal(expected, glyph.img_array)
+
 
 class TestAlphabet:
     def test_init(self):
@@ -66,15 +66,14 @@ class TestAlphabet:
         """glyphs property is an array of glyph objects"""
         for glyph in alphabet.glyphs:
             assert isinstance(glyph, Glyph)
-        
+
         """creates a glyph object for each character"""
         characters = string.printable[:-4]
         glyphs_characters = [glyph.character for glyph in alphabet.glyphs]
         assert len(alphabet.glyphs) == len(characters)
         for char in characters:
             assert char in glyphs_characters
-        
+
         """creates the img_array for each glyph"""
         for glyph in alphabet.glyphs:
             assert hasattr(glyph, "img_array")
-        
