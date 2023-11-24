@@ -62,7 +62,7 @@ class TestGlyph:
         with pytest.raises(ValueError) as exc_info:
             glyph.compare_array(np.empty(0, np.bool_))
         assert exc_info.type is ValueError
-        assert exc_info.args[0] == "input shape must match glyph shape"
+        assert exc_info.value.args[0] == "input shape must match glyph shape"
 
 class TestAlphabet:
     def test_init(self):
