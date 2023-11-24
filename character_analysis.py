@@ -88,21 +88,15 @@ class Alphabet:
 
     def find_black_character(self):
         """finds the character closest to a black square"""
-        best_score, best_character = 0, "" 
-        
+        best_score, best_character = 0, ""
+
         for glyph in self.glyphs:
-            height = len(glyph.img_array)
-            width = len(glyph.img_array[0])
-            black_square = np.ones((height, width), np.bool_)
-            
-            # score 1 for each element where img_array and black_square are the same
-            # this is equivalent to NOT XOR
-            score = np.sum(~(glyph.img_array ^ black_square))/black_square.size
-            
+            black_square = np.ones(glyph.img_array.shape, np.bool_)
+            score = glyph.compare_array(black_square)
             if score > best_score:
                best_score = score
                best_character = glyph.character
-               
+
         self.black_character = best_character
                
     def find_optimal_glyph(self, arr):
