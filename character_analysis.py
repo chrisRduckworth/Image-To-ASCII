@@ -48,8 +48,26 @@ class Glyph:
         self.img_array = img_array 
 
     def compare_array(self, arr):
-        pass
-
+        """returns a score for how close the input matches the character"""
+        if arr.shape != self.img_array.shape:
+            raise ValueError("input shape must match glyph shape")
+        """
+        We want to increase the score for each element in the array
+        that matches the input. Eg, comparing
+        [[1,0],
+         [0,1]]
+        with 
+        [[1,0],
+         [1,0]]
+        then we only want 1s at:
+        [[1,1],
+         [0,0]]
+        Or, we want 0s where they are different. This is equivalent
+        to NOT XOR
+        Then we just sum over the array and normalize by the size
+        of the array to get a score between 0 and 1
+        """
+        return np.sum(~(self.img_array ^ arr))/arr.size
 
 class Alphabet:
     def __init__(self, font_path, font_size, dpi=96):
