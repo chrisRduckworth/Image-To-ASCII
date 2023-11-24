@@ -36,7 +36,7 @@ class Glyph:
         # I haven't seen excess height but it might appear somewhere
         while len(img_array) > char_height:
             if (len(img_array) - char_height) % 2 == 1:
-                im_array = np.delete(img_array, 0, 0)
+                img_array = np.delete(img_array, 0, 0)
             else:
                 img_array = np.delete(img_array, len(img_array) - 1, 0)
         
