@@ -58,8 +58,15 @@ class Alphabet:
         self.dpi = dpi
 
     def create_glyphs(self):
-        characters = string.ascii_letters + string.digits + string.punctuation
-        self.glyphs = [Glyph(char) for char in characters]
+        """creates a glyph object for each character and creates their img_array"""
+        font = TTFont(self.font_path)
+        pillow_font = ImageFont.truetype(self.font_path, ceil(self.font_size * self.dpi / 72))
+        characters = string.printable[:-5]
+        all_characters = set(chain.from_iterable([table.cmap.items() for table in font["cmap"].tables]))
+        desired_characters = [(chr(char[0]), char[1]) for char in all_characters if chr(char[0]) in characters]
+        self.glyphs = [Glyph(char[0], char[1]) for char in desired_characters]
+        for glyph in self.glyphs:
+            glyph.generate_array(font, pillow_font, self.font_size, self.dpi)
 
     def find_optimal_glyph(self, arr):
         pass
