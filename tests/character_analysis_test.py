@@ -1,4 +1,5 @@
 from character_analysis import Glyph, Alphabet
+from math import ceil
 import numpy as np
 import string
 
@@ -29,7 +30,7 @@ class TestGlyph:
         expected = np.array(expected, np.bool_)
         font_path = "C:\\Windows\\Fonts\\consola.ttf"
         font = ttLib.TTFont(font_path)
-        pillow_font = ImageFont.truetype(font_path, 8)
+        pillow_font = ImageFont.truetype(font_path, ceil(8*96/72))
 
         glyph.generate_array(font, pillow_font, 8, 96)
 
@@ -68,7 +69,7 @@ class TestAlphabet:
             assert isinstance(glyph, Glyph)
 
         """creates a glyph object for each character"""
-        characters = string.printable[:-4]
+        characters = string.printable[:-5]
         glyphs_characters = [glyph.character for glyph in alphabet.glyphs]
         assert len(alphabet.glyphs) == len(characters)
         for char in characters:
