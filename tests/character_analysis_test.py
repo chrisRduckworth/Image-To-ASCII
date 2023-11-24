@@ -5,6 +5,7 @@ import string
 
 from PIL import ImageFont
 from fontTools import ttLib
+import pytest
 
 
 class TestGlyph:
@@ -43,6 +44,25 @@ class TestGlyph:
         """generated array should be correct"""
         assert np.array_equal(expected, glyph.img_array)
 
+    def test_compare_array(self):
+        glyph = Glyph("a", "a")
+        input_arr = np.zeros((11,6), np.bool_)
+        font_path = "C:\\Windows\\Fonts\\consola.ttf"
+        font = ttLib.TTFont(font_path)
+        pillow_font = ImageFont.truetype(font_path, ceil(8*96/72))
+
+        glyph.generate_array(font, pillow_font, 8, 96)
+
+        score = glyph.compare_array(input_arr)
+
+        """returns a score equal to the amount of matching entries"""
+        assert score == 49/66
+
+        """throws an error when input array is the wrong shape"""
+        with pytest.raises(ValueError) as exc_info:
+            glyph.compare_array(np.empty(0, np.bool_))
+        assert exc_info.type is ValueError
+        assert exc_info.args[0] == "input shape must match glyph shape"
 
 class TestAlphabet:
     def test_init(self):
