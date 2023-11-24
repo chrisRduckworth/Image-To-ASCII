@@ -78,3 +78,17 @@ class TestAlphabet:
         """creates the img_array for each glyph"""
         for glyph in alphabet.glyphs:
             assert hasattr(glyph, "img_array")
+
+    def test_find_black_character(self):
+        font_path = "C:\\Windows\\Fonts\\consola.ttf"
+        font_size = 8
+        alphabet = Alphabet(font_path, font_size)
+        alphabet.create_glyphs()
+        
+        alphabet.find_black_character()
+
+        """creates a black_character property"""
+        assert hasattr(alphabet, "black_character")
+
+        """sets black_character to character closest to black square"""
+        assert alphabet.black_character == "@"
