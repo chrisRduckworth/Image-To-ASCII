@@ -105,4 +105,15 @@ class Alphabet:
         self.max_width = max(widths)
 
     def find_optimal_glyph(self, arr):
-        pass
+        """finds the glyph which most closely matches the input array"""
+        # check if it's a white or black box to save time
+        space = next(g for g in self.glyphs if g.character == " ")
+        if np.array_equal(arr, space.img_array):
+            return space
+        black_arr = np.ones((self.black_character.height, self.black_character.width),np.bool_)
+        if np.array_equal(arr, black_arr):
+            return self.black_character
+
+        # calculate scores and return max
+        scores = {glyph: glyph.compare_array(arr) for glyph in self.glyphs}
+        return max(scores, key=scores.get)
