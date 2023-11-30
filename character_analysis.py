@@ -114,10 +114,15 @@ class Alphabet:
         """finds the glyph which most closely matches the input array"""
         # check if it's a white or black box to save time
         space = next(g for g in self.glyphs if g.character == " ")
-        if np.array_equal(arr, space.img_array):
+        columns_to_delete = [len(arr[0]) - (i + 1) for i in range(len(arr[0]) - space.width)]
+        trimmed_arr = np.delete(arr, columns_to_delete, 1)
+        if np.array_equal(trimmed_arr, space.img_array):
             return space
+        
         black_arr = np.ones((self.black_character.height, self.black_character.width),np.bool_)
-        if np.array_equal(arr, black_arr):
+        columns_to_delete = [len(arr[0]) - (i + 1) for i in range(len(arr[0]) - self.black_character.width)]
+        trimmed_arr = np.delete(arr, columns_to_delete, 1)
+        if np.array_equal(trimmed_arr, black_arr):
             return self.black_character
 
         # calculate scores and return max
