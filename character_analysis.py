@@ -18,6 +18,8 @@ class Glyph:
         if self.character == " ":
             img_array = np.zeros((char_height, char_width), np.bool_)
             self.img_array = img_array
+            self.width = len(img_array[0])
+            self.height = len(img_array)
             return
 
         # draw array of character
