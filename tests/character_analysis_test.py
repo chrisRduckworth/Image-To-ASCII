@@ -44,6 +44,10 @@ class TestGlyph:
         """generated array should be correct"""
         assert np.array_equal(expected, glyph.img_array)
 
+        """creates width and height attributes"""
+        assert glyph.height == 11
+        assert glyph.width == 6
+
     def test_compare_array(self):
         glyph = Glyph("a", "a")
         input_arr = np.zeros((11,6), np.bool_)

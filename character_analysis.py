@@ -46,6 +46,8 @@ class Glyph:
         # no need to pad width
         
         self.img_array = img_array 
+        self.width = len(img_array[0])
+        self.height = len(img_array)
 
     def compare_array(self, arr):
         """returns a score for how close the input matches the character"""
