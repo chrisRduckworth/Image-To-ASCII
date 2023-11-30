@@ -166,3 +166,23 @@ class TestAlphabet:
         optimal_glyph = alphabet.find_optimal_glyph(input_arr)
 
         assert optimal_glyph.character == "a"
+
+    def test_find_optimal_glyph_variable_width(self):
+        font_path="C:\\Windows\\Fonts\\arial.ttf"
+        font_size = 8
+        alphabet = Alphabet(font_path, font_size)
+        alphabet.create_glyphs()
+        alphabet.find_max_width()
+
+        """Finds optimal glyph for white array"""
+        input_arr = np.zeros((11, alphabet.max_width), np.bool_)
+        optimal_glyph = alphabet.find_optimal_glyph(input_arr)
+
+        assert optimal_glyph.character == " "
+
+        """Finds optimal glyph for black array"""
+        alphabet.find_black_character()
+        input_arr = np.ones((11, alphabet.max_width), np.bool_)
+        optimal_glyph = alphabet.find_optimal_glyph(input_arr)
+        
+        assert optimal_glyph.character == alphabet.black_character.character
