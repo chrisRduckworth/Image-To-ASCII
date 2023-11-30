@@ -23,7 +23,11 @@ class Glyph:
             return
 
         # draw array of character
-        bounding_box = pillow_font.getbbox(self.character, mode="1") 
+        bounding_box = list(pillow_font.getbbox(self.character, mode="1"))
+        if bounding_box[3] > char_height:
+            # for characters that are too tall
+            bounding_box[1] -= bounding_box[3] - char_height
+            bounding_box[3] -= bounding_box[3] - char_height
         img_array = np.array(pillow_font.getmask(self.character, "1"), np.bool_)
         img_array = img_array.reshape((-1, bounding_box[2] - bounding_box[0]))
         
