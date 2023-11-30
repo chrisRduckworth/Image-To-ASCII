@@ -114,8 +114,8 @@ class TestAlphabet:
         """creates a black_character property"""
         assert hasattr(alphabet, "black_character")
 
-        """sets black_character to character closest to black square"""
-        assert alphabet.black_character == "@"
+        """sets black_character to glyph closest to black square"""
+        assert alphabet.black_character.character == "@"
     
     def test_find_max_width(self):
         font_path = "C:\\Windows\\Fonts\\arial.ttf"

@@ -97,7 +97,7 @@ class Alphabet:
             scores[glyph.character] = score
         best_character = max(scores, key=scores.get)
 
-        self.black_character = best_character
+        self.black_character = next(g for g in self.glyphs if g.character == best_character)
     
     def find_max_width(self):
         """finds the maximum width of glyphs"""
