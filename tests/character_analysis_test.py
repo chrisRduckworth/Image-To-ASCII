@@ -130,3 +130,39 @@ class TestAlphabet:
 
         """sets max_width to the maximum width of all glyphs"""
         assert alphabet.max_width == 11
+
+    def test_find_optimal_glyph_fixed_width(self):
+        font_path = "C:\\Windows\\Fonts\\consola.ttf"
+        font_size = 8
+        alphabet = Alphabet(font_path, font_size)
+        alphabet.create_glyphs()
+        
+        """Finds optimal glyph for white array"""
+        input_arr = np.zeros((11,6), np.bool_)
+        optimal_glyph = alphabet.find_optimal_glyph(input_arr)
+
+        assert optimal_glyph.character == " "
+
+        """Finds optimal black array"""
+        alphabet.find_black_character()
+        input_arr = np.ones((11,6), np.bool_)
+        optimal_glyph = alphabet.find_optimal_glyph(input_arr)
+        
+        assert optimal_glyph.character == alphabet.black_character.character
+
+        """Finds optimal array for other arrays"""
+        input_arr = [[False, False, False, False, False, False],
+                    [False, False, False, False, False, False],
+                    [False, False, False, False, False, False],
+                    [False, False,  True,  True,  True, False],
+                    [False, False, False, False, False,  True],
+                    [False, False,  True,  True,  True,  True],
+                    [False,  True, False, False, False,  True],
+                    [False,  True, False, False,  True,  True],
+                    [False, False,  True,  True,  True,  True],
+                    [False, False, False, False, False, False],
+                    [False, False, False, False, False, False]]
+        input_arr = np.array(input_arr, np.bool_)
+        optimal_glyph = alphabet.find_optimal_glyph(input_arr)
+
+        assert optimal_glyph.character == "a"
