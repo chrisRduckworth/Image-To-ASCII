@@ -96,6 +96,11 @@ class Alphabet:
         best_character = max(scores, key=scores.get)
 
         self.black_character = best_character
-               
+    
+    def find_max_width(self):
+        """finds the maximum width of glyphs"""
+        widths = [len(glyph.img_array[0]) for glyph in self.glyphs]
+        self.max_width = max(widths)
+
     def find_optimal_glyph(self, arr):
         pass
