@@ -119,7 +119,7 @@ class Alphabet:
         if np.array_equal(trimmed_arr, space.img_array):
             return space
         
-        black_arr = np.ones((self.black_character.height, self.black_character.width),np.bool_)
+        black_arr = np.ones(self.black_character.img_array.shape,np.bool_)
         columns_to_delete = [len(arr[0]) - (i + 1) for i in range(len(arr[0]) - self.black_character.width)]
         trimmed_arr = np.delete(arr, columns_to_delete, 1)
         if np.array_equal(trimmed_arr, black_arr):
