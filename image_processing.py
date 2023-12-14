@@ -12,6 +12,7 @@ def load_image(img_name, edge_detection, max_val, min_val):
     return img
 
 def trim_whitespace(img):
+    """removes empty rows/columns"""
     while not any(img[0]):
         img = img[1:]
     while not any(img[-1]):
@@ -20,4 +21,11 @@ def trim_whitespace(img):
         img = [r[1:] for r in img]
     while not any(r[-1] for r in img):
         img = [r[:-1] for r in img]
+    return img
+
+def pad_height(img, char_height):
+    if img.shape[0] % char_height == 0:
+        return img
+    height_to_add = char_height - (img.shape[0] % char_height)
+    img = np.concatenate((img, np.zeros((height_to_add, img.shape[1]), np.bool_)))
     return img
