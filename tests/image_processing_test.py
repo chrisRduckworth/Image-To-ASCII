@@ -1,4 +1,4 @@
-from image_processing import load_image, trim_whitespace
+from image_processing import load_image, trim_whitespace, pad_height
 import numpy as np
 
 class TestLoadImage:
@@ -79,3 +79,38 @@ class TestTrimWhitespace:
         trimmed = trim_whitespace(img)
 
         assert np.array_equal(trimmed, np.array([[1]], np.bool_))
+
+class TestPadHeight:
+    def test_does_nothing_on_compatible_heights(self):
+        img = np.ones((8,4), np.bool_)
+        expected = np.copy(img)
+        char_height = 4
+
+        padded = pad_height(img, char_height)
+
+        assert np.array_equal(padded, expected)
+
+    def test_pads_height_to_have_correct_height(self):
+        img = np.ones((8,4), np.bool_)
+        char_height = 5
+
+        padded = pad_height(img, char_height)
+
+        assert padded.shape == (10, 4)
+
+    def test_pads_with_zeros(self):
+        img = np.ones((8,4), np.bool_)
+        char_height = 5
+
+        padded = pad_height(img, char_height)
+
+        assert np.array_equal(padded[-2:], np.zeros((2,4), np.bool_))
+    
+    def test_does_not_change_rest_of_array(self):
+        img = np.ones((8,4), np.bool_)
+        expected = np.copy(img)
+        char_height = 5
+
+        padded = pad_height(img, char_height)
+
+        assert np.array_equal(padded[:8], expected)
