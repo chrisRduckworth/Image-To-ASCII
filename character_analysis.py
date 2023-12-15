@@ -24,6 +24,11 @@ class Glyph:
 
         # draw array of character
         bounding_box = list(pillow_font.getbbox(self.character, mode="1"))
+        if bounding_box[1] < 0:
+            off_by = abs(bounding_box[1])
+            bounding_box[1] += off_by
+            bounding_box[3] += off_by
+            
         if bounding_box[3] > char_height:
             # for characters that are too tall
             bounding_box[1] -= bounding_box[3] - char_height
