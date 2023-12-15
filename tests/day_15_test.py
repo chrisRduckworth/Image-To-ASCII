@@ -5,6 +5,6 @@ class TestCalcNewValue:
         assert calc_new_value(0, "H") == 200
 
     def test_returns_correct_value(self):
-        assert calc_new_value(72, "A") == 153
-        assert calc_new_value(200, "S") == 172
+        assert calc_new_value(200, "A") == 153
+        assert calc_new_value(153, "S") == 172
         assert calc_new_value(172, "H") == 52
