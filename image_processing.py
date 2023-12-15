@@ -7,7 +7,7 @@ def load_image(img_name, edge_detection, max_val, min_val):
     if edge_detection:
         img = cv.Canny(img, max_val, min_val)
     img = cv.threshold(img, 127, 255, cv.THRESH_BINARY)[1]
-    img = np.array(img, np.bool_)
+    img = ~ np.array(img, np.bool_)
     return img
 
 def trim_whitespace(img):
