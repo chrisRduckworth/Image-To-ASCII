@@ -11,9 +11,10 @@ def main(img_path, font_path, **kwargs):
     edge_detection = kwargs["edge_detection"].lower() == "true" if "edge_detection" in kwargs else True
     min_val = int(kwargs["min_val"]) if "min_val" in kwargs else 100
     max_val = int(kwargs["max_val"]) if "max_val" in kwargs else 150
+    dpi = int(kwargs["dpi"]) if "dpi" in kwargs else 96
 
     # Create font information
-    alphabet = Alphabet(font_path, font_size)
+    alphabet = Alphabet(font_path, font_size, dpi)
     alphabet.create_glyphs()
     alphabet.find_black_character()
     alphabet.find_max_width()
