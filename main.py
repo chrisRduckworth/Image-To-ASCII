@@ -1,4 +1,5 @@
 import sys
+import re
 
 from character_analysis import Alphabet
 from image_processing import load_image, trim_whitespace, pad_height
@@ -25,6 +26,10 @@ def main(img_path, font_path, **kwargs):
     # convert to string
     ascii_string = image_to_ascii(img, alphabet)
     print(ascii_string)
+    file_name = re.search(r"(\\|/)?\w+(?=\.[a-zA-Z]+)", img_path)[0][1:]
+    with open(f"{file_name}.txt", "w") as f:
+        f.write(ascii_string)
+        
     
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2], **dict(arg.split("=") for arg in sys.argv[3:]))
