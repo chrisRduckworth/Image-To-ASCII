@@ -1,4 +1,6 @@
-from image_to_ascii import get_subarray
+from image_to_ascii import get_subarray, image_to_ascii
+from character_analysis import Alphabet
+from image_processing import pad_height
 import numpy as np
 
 class TestGetSubarray:
@@ -46,3 +48,41 @@ class TestGetSubarray:
         sub = get_subarray(img, (3,0), (4,4))
 
         assert np.array_equal(sub, expected)
+
+class TestImageToAscii:
+    def test_returns_string(self):
+        font_path = "C:\\Windows\\Fonts\\consola.ttf"
+        font_size = 8
+        alphabet = Alphabet(font_path, font_size)
+        alphabet.create_glyphs()
+        alphabet.find_black_character()
+        alphabet.find_max_width()
+        char_height = alphabet.glyphs[0].height
+
+        img = np.random.rand(50,50)
+        img = np.array([[x > 0.5 for x in row] for row in img], np.bool_)
+        img = pad_height(img, char_height)
+        
+        out = image_to_ascii(img, alphabet)
+
+        assert type(out) == str
+        assert str != ""
+
+    def test_string_has_correct_height(self):
+        font_path = "C:\\Windows\\Fonts\\consola.ttf"
+        font_size = 8
+        alphabet = Alphabet(font_path, font_size)
+        alphabet.create_glyphs()
+        alphabet.find_black_character()
+        alphabet.find_max_width()
+        char_height = alphabet.glyphs[0].height
+
+        img = np.random.rand(50,50)
+        img = np.array([[x > 0.5 for x in row] for row in img], np.bool_)
+        img = pad_height(img, char_height)
+        
+        out = image_to_ascii(img, alphabet)
+        height = len(out.splitlines())
+
+        assert height == 5
+        
