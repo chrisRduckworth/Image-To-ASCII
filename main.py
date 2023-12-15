@@ -27,7 +27,7 @@ def main(img_path, font_path, **kwargs):
     # convert to string
     ascii_string = image_to_ascii(img, alphabet)
     print(ascii_string)
-    file_name = re.search(r"(\\|/)?\w+(?=\.[a-zA-Z]+)", img_path)[0][1:]
+    file_name = re.search(r"(\\|/)?[\w\d\-]+(?=\.[a-zA-Z]+)", img_path)[0][1:]
     with open(f"{file_name}.txt", "w") as f:
         f.write(ascii_string)
         
