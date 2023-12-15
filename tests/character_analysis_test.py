@@ -186,3 +186,10 @@ class TestAlphabet:
         optimal_glyph = alphabet.find_optimal_glyph(input_arr)
         
         assert optimal_glyph.character == alphabet.black_character.character
+
+        # use W because it is max width
+        input_arr = next(g.img_array for g in alphabet.glyphs if g.character == "W")
+        optimal_glyph = alphabet.find_optimal_glyph(input_arr)
+
+        # technically it can be \ because of the way we trim the input
+        assert optimal_glyph.character in "W\\"

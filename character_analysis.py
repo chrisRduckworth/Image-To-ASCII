@@ -126,5 +126,10 @@ class Alphabet:
             return self.black_character
 
         # calculate scores and return max
-        scores = {glyph: glyph.compare_array(arr) for glyph in self.glyphs}
+        scores = {}
+        for glyph in self.glyphs:
+            columns_to_delete = [len(arr[0]) - (i + 1) for i in range(len(arr[0]) - glyph.width)]
+            trimmed_arr = np.delete(arr, columns_to_delete, 1)
+            scores[glyph] = glyph.compare_array(trimmed_arr)
+            
         return max(scores, key=scores.get)
