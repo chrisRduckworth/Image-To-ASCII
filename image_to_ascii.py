@@ -14,8 +14,16 @@ def get_subarray(img, coords, dimensions):
 
     return np.array(subarray, dtype = img.dtype)
 
-def main():
-  pass
-
-if __name__ == "__main__":
-  main()
+def image_to_ascii(img, alphabet):
+    """converts a numpy array (img) to an ASCII string"""
+    output_string = ""
+    for y in range(0, len(img), alphabet.glyphs[0].height):
+        x = 0
+        while x <= len(img[0]):
+            to_compare = get_subarray(img, (x,y), (alphabet.max_width, alphabet.glyphs[0].height))
+            best_match = alphabet.find_optimal_glyph(to_compare)
+            
+            output_string += best_match.character
+            x += best_match.width
+        output_string += "\n"
+    return output_string
