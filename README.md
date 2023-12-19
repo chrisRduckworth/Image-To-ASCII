@@ -63,6 +63,16 @@ Image-To-ASCII accepts the following keyword arguments:
 font_size=integer
 ```
 
+ - Trim Whitespace - Enable or disable the trimming of whitespace around the edge of the image. Default true:
+```
+trim_whitespace=boolean
+```
+
+ - Threshold - The minimum pixel value to be considered a black pixel in the conversion. Default 127:
+```
+threshold=boolean
+```
+
  - Edge detection - Enable or disable edge detection on the input image. Uses [OpenCV Canny Edge Detection](https://docs.opencv.org/3.4/da/d22/tutorial_py_canny.html). Default true:
  ```
  edge_detection=boolean

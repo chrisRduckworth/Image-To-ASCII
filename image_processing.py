@@ -1,13 +1,13 @@
 import cv2 as cv
 import numpy as np
 
-def load_image(img_name, edge_detection, max_val, min_val):
+def load_image(img_name, edge_detection, max_val, min_val, threshold):
     """loads the image, runs edge detection"""
     img = cv.imread(img_name, cv.IMREAD_GRAYSCALE)
     if edge_detection:
         img = cv.Canny(img, max_val, min_val)
-    img = cv.threshold(img, 127, 255, cv.THRESH_BINARY)[1]
-    img = ~ np.array(img, np.bool_)
+    img = cv.threshold(img, threshold, 255, cv.THRESH_BINARY)[1]
+    img = np.array(img, np.bool_)
     return img
 
 def trim_whitespace(img):

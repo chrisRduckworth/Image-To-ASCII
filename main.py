@@ -12,6 +12,8 @@ def main(img_path, font_path, **kwargs):
     min_val = int(kwargs["min_val"]) if "min_val" in kwargs else 100
     max_val = int(kwargs["max_val"]) if "max_val" in kwargs else 150
     dpi = int(kwargs["dpi"]) if "dpi" in kwargs else 96
+    do_trim = kwargs["trim_whitespace"].lower() == "true" if "trim_whitespace" in kwargs else True 
+    threshold = int(kwargs["threshold"]) if "threshold" in kwargs else 127
 
     # Create font information
     alphabet = Alphabet(font_path, font_size, dpi)
@@ -20,8 +22,9 @@ def main(img_path, font_path, **kwargs):
     alphabet.find_max_width()
 
     # process image
-    img = load_image(img_path, edge_detection, min_val, max_val)
-    img = trim_whitespace(img)
+    img = load_image(img_path, edge_detection, min_val, max_val, threshold)
+    if do_trim:
+        img = trim_whitespace(img)
     img = pad_height(img, alphabet.glyphs[0].height)
     
     # convert to string
