@@ -63,6 +63,11 @@ Image-To-ASCII accepts the following keyword arguments:
 font_size=integer
 ```
 
+ - Character limit - Maximum number of characters of the output string. Many websites have a maximum of 2000 (eg Discord). If 0 or less, there is not limit on the length. Overrides font size. Default 0
+```
+char_limit=integer
+```
+
  - Trim Whitespace - Enable or disable the trimming of whitespace around the edge of the image. Default true:
 ```
 trim_whitespace=boolean
