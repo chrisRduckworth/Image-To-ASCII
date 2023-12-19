@@ -16,9 +16,10 @@ def main(img_path, font_path, **kwargs):
     do_trim = kwargs["trim_whitespace"].lower() == "true" if "trim_whitespace" in kwargs else True 
     threshold = int(kwargs["threshold"]) if "threshold" in kwargs else 127
     char_limit = int(kwargs["char_limit"]) if "char_limit" in kwargs else 0 
+    inverse = kwargs["inverse"].lower() == "true" if "inverse" in kwargs else False
 
     # process image
-    img = load_image(img_path, edge_detection, min_val, max_val, threshold)
+    img = load_image(img_path, edge_detection, min_val, max_val, threshold, inverse)
     if do_trim:
         img = trim_whitespace(img)
 

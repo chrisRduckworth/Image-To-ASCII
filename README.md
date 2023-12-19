@@ -2,43 +2,47 @@
 Image-To-ASCII is a python program to convert any image to a string of ASCII characters. When you run the command in your terminal, it will print a copy of the string and create a `txt` file in directory.
 
 ```
-                           ._..r"+`f`"-^e=-.                                    
-                     _.~O-f` ``            `r~w-                                
-                   ._Y`                         ^<-                             
-                 xp`                       -      `c>                           
-               _`/     ||..-_ .--          -. _   !  \>                         
-         - }> '!h        ^  `                  `       .                        
-   xh_:<>   J? `                                        ~.                      
-  (` |!!+=z]t!-                                          |.                     
-  [..-c_}xy  . ?R_        . ---.            _.   ++-. _   w                     
-  n`  j"hh`  J    .. +       .  _   -+_  >  `_ ..-.._  `  ' |                   
-  ! 7 .\L|Wr ~`>-_      - `       -_   `   . `       '.   . |                   
-  v!  |(^A|_  h`,|`\   7'              {  r           2  !  r                   
-  y   |!/, *3(l=<(                  !. !              7  `  '                   
- /    |T'    `=[x'  \  .            ' /\  L           ` _   h                   
- |    !yj   ..s'     X  +        _.q%, '\  !       .r  '`   h                   
-<^    b-<Srf`         '. `^--  .  /_<    '.  '    ' _<`    .|                   
-k~` s;!k`[              '~.      >c`       ` -...- " -r.   !|                   
-  ` 'f" jr       (_7-+-_.._ _```           __ .-.}j`<` '   HL       ,=_~        
-         |       `   8x !`F r `FFFFFF+'F``z` -` -gy`      -V        T   !       
-         \'            `(~__l-_______$  ..[--x'*7x       zC`        hx-=!       
-          G              4>_]_  "C  `!````.   L/'        D)          | J!       
-          `                '*{   !   !    L .0 '        zW         !H-`-\       
-           \_                 '' w---!--=-P``  .y'     (7          /  }==)-__   
-            ' ,            _ _              _..'      fx`         U /`[L     '. 
-             `' _           "?>__        .-'``     _ 3'          nc`w.'      .| 
-               '.T              `   ++   `       .?`             |!`Y  `.`` -J  
-                 T.<                          ___>               |L \ .{r     M 
-                   `>C-5.                 ,+:5>'`                ` \.!.C-._r 3( 
-                       '^-e5_       .._ts !``                      `|'!    ~O   
-                             `````````                              'm_.____U   
-                                                                       `````    
+               _,gggg@@@@@@@@@ggg,_                
+              g@@@@@@@@@@@@@@@@@@@@@_              
+             j@@@"`"&@@@@@@@@@@@@@@@@              
+             &@@[   J@@@@@@@@@@@@@@@@[             
+             &@@@g,g@@@@@@@@@@@@@@@@@[             
+             &@@@@@@@@@@@@@@@@@@@@@@@[             
+             ************%@@@@@@@@@@@[             
+    _,ggggggggggggggggggg@@@@@@@@@@@@[ ggggggg,    
+  _g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ @@@@@@@@@_  
+ ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ @@@@@@@@@@  
+ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ @@@@@@@@@@@ 
+j@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"J@@@@@@@@@@@ 
+g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"_@@@@@@@@@@@@[
+&@@@@@@@@@@@@@@@@&&&&&&&&&&&&&&&&P"_g@@@@@@@@@@@@@@
+&@@@@@@@@@@@@@#"__,,,,,,,,,,,,,,ggg@@@@@@@@@@@@@@@@
+&@@@@@@@@@@@@"_g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#
+l@@@@@@@@@@@`_@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P
+ @@@@@@@@@@@ g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+ &@@@@@@@@@@ &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@` 
+  %@@@@@@@@@ &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"  
+   "%&@@@@@@ &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&P"   
+             &@@@@@@@@@@@[____________             
+             &@@@@@@@@@@@@@@@@@@@@@@@[             
+             &@@@@@@@@@@@@@@@@@&&&@@@[             
+             &@@@@@@@@@@@@@@@@`   %@@[             
+             &@@@@@@@@@@@@@@@@_  _g@@C             
+              *&@@@@@@@@@@@@@@@@g@@@"              
+                "&&@@@@@@@@@@@@@&P"                
+                    `""*****""`                    
+                                                   
+                 ___,,,,,,,,,,____                 
+            _ggg@@@@@@@@@@@@@@@@@@@ggg_            
+            &@@@@@@@@@@@@@@@@@@@@@@@@@@            
+             ""M&&&&@@@@@@@@@@@&&&&P*"             
+                        ```                        
 
 ```
 
 The above art was generated with 
 ```
-python main.py sunglasses.png C:\\Windows\\Fonts\\consola.ttf font_size=8 min_val=50 max_val=175
+python main.py Python.png C:\Windows\Fonts\consola.ttf edge_detection=false threshold=50 char_limit=2000
 ```
 
 ## Requirements
@@ -76,6 +80,11 @@ trim_whitespace=boolean
  - Threshold - The minimum pixel value to be considered a black pixel in the conversion. Default 127:
 ```
 threshold=boolean
+```
+
+ - Inverse - Inverts the image so black pixels become white and vice versa. Default false:
+```
+inverse=boolean
 ```
 
  - Edge detection - Enable or disable edge detection on the input image. Uses [OpenCV Canny Edge Detection](https://docs.opencv.org/3.4/da/d22/tutorial_py_canny.html). Default true:
