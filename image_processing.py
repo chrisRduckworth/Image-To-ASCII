@@ -12,14 +12,13 @@ def load_image(img_name, edge_detection, max_val, min_val, threshold):
 
 def trim_whitespace(img):
     """removes empty rows/columns"""
-    while not any(img[0]):
-        img = np.delete(img, 0, 0)
-    while not any(img[-1]):
-        img = np.delete(img, -1, 0)
-    while not any(r[0] for r in img):
-        img = np.delete(img, 0, 1)
-    while not any(r[-1] for r in img):
-        img = np.delete(img, -1, 1)
+    non_zero_indices = np.nonzero(img)
+    min_y = min(non_zero_indices[0])
+    max_y = max(non_zero_indices[0])
+    min_x = min(non_zero_indices[1])
+    max_x = max(non_zero_indices[1])
+
+    img = img[min_y: max_y + 1, min_x: max_x + 1]
     return img
 
 def pad_height(img, char_height):
