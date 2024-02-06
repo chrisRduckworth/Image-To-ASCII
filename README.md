@@ -45,6 +45,8 @@ The above art was generated with
 python main.py Python.png C:\Windows\Fonts\consola.ttf edge_detection=false threshold=50 char_limit=2000
 ```
 
+I'm pretty pleased with the result of this project. It's not as fast as I'd hoped but it's much more cleanly written than my previous version and it was my first time using pytest.
+
 ## Requirements
 Earlier versions may work but have not been tested.
  - Python 3.11
